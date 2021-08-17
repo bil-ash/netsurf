@@ -13,12 +13,7 @@ jobs:
       - name: prepare workspace
         run: unset HOST && source env.sh && ns-package-install && ns-clone && ns-pull-install
       - name: switch to new workspace
-        run: rm env.sh && cd /home/runner/dev-netsurf/workspace && source env.sh && cd netsurf && make TARGET=framebuffer && mkdir output && mv nsfb output/nsfb
-      - name: Archive binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: binary
-          path: output/
+        run: rm env.sh && cd /home/runner/dev-netsurf/workspace && source env.sh && cd netsurf && make TARGET=framebuffer
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         id: create_release
@@ -28,4 +23,4 @@ jobs:
         with:
           files: |
             README.md
-            binary
+            /home/runner/dev-netsurf/workspace/netsurf/nsfb
