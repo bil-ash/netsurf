@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Grab a temporary env.sh
-        run: unset HOST && source env.sh && cd /home/runner
+        run: unset HOST && source env.sh && ls && cd /home/runner && ls
       - name: install any required packages
         run: ns-package-install
       - name: clone
