@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Grab a temporary env.sh
-        run: unset HOST && source env.sh
+        run: unset HOST && source env.sh && cd /home/runner
       - name: install any required packages
         run: ns-package-install
       - name: clone
@@ -19,6 +19,6 @@ jobs:
       - name: update
         run: ns-pull-install
       - name: switch to new workspace
-        run: rm env.sh && cd ~/dev-netsurf/workspace && source env.sh && cd netsurf 
+        run: rm env.sh && cd dev-netsurf/workspace && source env.sh && cd netsurf 
       - name: build framebuffer
         run: make TARGET=framebuffer
