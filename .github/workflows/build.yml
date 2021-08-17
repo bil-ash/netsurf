@@ -1,0 +1,29 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: unset host
+        run: unset HOST
+      - name: Grab a temporary env.sh
+        run: source env.sh
+      - name: install any required packages
+        run: ns-package-install
+      - name: clone
+        run: ns-clone
+      - name: update
+        run: ns-pull-install
+      - name: switch to new workspace
+        run: rm env.sh
+        run: cd ~/dev-netsurf/workspace
+        run: source env.sh
+        run: cd netsurf
+      - name: build framebuffer
+        run: make TARGET=framebuffer
