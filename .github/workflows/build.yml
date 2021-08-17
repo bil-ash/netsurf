@@ -13,6 +13,6 @@ jobs:
       - name: prepare workspace
         run: unset HOST && source env.sh && ns-package-install && ns-clone && ns-pull-install
       - name: switch to new workspace
-        run: rm env.sh && cd /home/runner/dev-netsurf/workspace && source env.sh && cd netsurf 
+        run: rm env.sh && cd /home/runner/dev-netsurf/workspace && source env.sh && cd netsurf && make TARGET=framebuffer
       - name: build framebuffer
-        run: make TARGET=framebuffer
+        run: ls
